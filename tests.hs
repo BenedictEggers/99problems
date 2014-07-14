@@ -5,7 +5,7 @@
 
 module Tests where
 
-import MyLists( myLast, myButLast, myElementAt, myLength )
+import MyLists( myLast, myButLast, myElementAt, myLength, myReverse )
 import Test.HUnit
 
 main = runTestTT all_tests
@@ -15,7 +15,8 @@ all_tests = TestList [test1thru10]
 test1thru10 = TestList [testMyLast
                       , testMyButLast
                       , testMyElementAt
-                      , testMyLength]
+                      , testMyLength
+                      , testMyReverse]
 
 -- Problem 1
 testMyLast = TestList [testMyLast1, testMyLast2, testMyLast3]
@@ -55,3 +56,16 @@ testMyLength2 = TestCase (assertEqual "Length of [1,2,3] should be 3"
                           3 (myLength [1,2,3]))
 testMyLength3 = TestCase (assertEqual "Length of 'hello, world!' should be 13"
                           13 (myLength "hello, world!"))
+
+-- Problem 5
+testMyReverse = TestList []
+testMyReverse1 = TestCase (assertEqual "[1] reversed should be [1]"
+                            [1] (myReverse [1]))
+testMyReverse2 = TestCase (assertEqual "[1,2] reversed should be [2,1]"
+                            [2,1] (myReverse [1,2]))
+testMyReverse3 = TestCase (assertEqual "['a'..'z'] reversed should be ['z'..'a']"
+                            ['z'..'a'] (myReverse ['a'..'z']))
+testMyReverse4 = TestCase (assertEqual "'A man, a plan, a canal, panama!' reversed should be \
+                            \ '!amanap ,lanac a ,nalp a ,nam A'"
+                            "!amanap ,lanac a ,nalp a ,nam A"
+                            (myReverse "A man, a plan, a canal, panama!"))

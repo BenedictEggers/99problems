@@ -8,6 +8,7 @@ module MyLists
 , myButLast
 , myElementAt
 , myLength
+, myReverse
 ) where
 
 myLast [x] = x
@@ -22,3 +23,6 @@ myElementAt xs n
 
 myLength [] = 0
 myLength (x:xs) = 1 + myLength xs
+
+myReverse [] = []
+myReverse (x:xs) = (myReverse xs) ++ [x]

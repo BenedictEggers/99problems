@@ -3,40 +3,43 @@
 
 module MyLists where
 
--- 1
+-- Problem 1
 last' [x] = x
 last' (x:xs) = last' xs
 
--- 2
+-- Problem 2
 butLast' [x, y] = x
 butLast' (x:xs) = butLast' xs
 
--- 3
+-- Problem 3
 elementAt' xs n
     | n == 1    = head xs
     | otherwise = elementAt' (tail xs) (n - 1)
 
--- 4
+-- Problem 4
 length' [] = 0
 length' (x:xs) = 1 + length' xs
 
--- 5
+-- Problem 5
 reverse' [] = []
 reverse' (x:xs) = (reverse' xs) ++ [x]
 
--- 6
+-- Problem 6
 isPalindrome' xs = xs == (reverse' xs)
 
--- 7
+-- Problem 7
 data NestedList a = Elem a | List [NestedList a]
-flatten' :: NestedList a -> [a]
 flatten' list = []
 
--- 8
-compress' stuff = ""
+-- Problem 8
+compress' [] = []
+compress' [x] = [x]
+compress' (x:xs)
+    | x == head xs    = compress' xs
+    | otherwise       = x : (compress' xs)
 
--- 9
+-- Problem 9
 pack' stuff = []
 
--- 10
+-- Problem 10
 encode' stuff = []

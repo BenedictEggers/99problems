@@ -1,5 +1,7 @@
 -- Ben Eggers
--- Tests for all my solutions
+-- Tests for all my solutions. Note: I think this test harness isn't laid out
+-- in the proper HUnit style, but I couldn't find accessible guides online. Drop
+-- me a line if you have constructive criticism.
 
  --TODO: Auto-populate test lists?
 
@@ -72,4 +74,10 @@ testMyReverse4 = TestCase (assertEqual "'A man, a plan, a canal, panama!' revers
                             (myReverse "A man, a plan, a canal, panama!"))
 
 -- Problem 6
-testIsPalindrome = TestList []
+testIsPalindrome = TestList [testIsPalindrome1, testIsPalindrome2, testIsPalindrome3]
+testIsPalindrome1 = TestCase (assertEqual "[1,2,3] is not a palindrome"
+                              False (isPalindrome [1,2,3]))
+testIsPalindrome2 = TestCase (assertEqual "'racecar' is a palindrome"
+                              True (isPalindrome "racecar"))
+testIsPalindrome3 = TestCase (assertEqual "[1,2,4,8,16,8,4,2,1] is a palindrome"
+                              True (isPalindrome [1,2,4,8,16,8,4,2,1]))

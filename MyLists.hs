@@ -1,6 +1,4 @@
--- Ben Eggers
--- MIT Licensed
-
+-- Ben Eggers <ben.eggers36@gmail.com>
 -- Problems 1-10
 
 module MyLists
@@ -10,6 +8,7 @@ module MyLists
 , myLength
 , myReverse
 , isPalindrome
+, myFlatten
 ) where
 
 -- 1
@@ -35,3 +34,7 @@ myReverse (x:xs) = (myReverse xs) ++ [x]
 
 -- 6
 isPalindrome xs = xs == (myReverse xs)
+
+-- 7
+data NestedList a = Elem a | List [NestedList a]
+myFlatten = 7

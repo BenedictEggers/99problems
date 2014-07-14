@@ -7,7 +7,7 @@
 
 module MyLists_tests (test1thru10) where
 
-import MyLists( myLast, myButLast, myElementAt, myLength, myReverse, isPalindrome )
+import MyLists
 import Test.HUnit
 
 main = runTestTT test1thru10
@@ -17,7 +17,8 @@ test1thru10 = TestList [testMyLast
                       , testMyElementAt
                       , testMyLength
                       , testMyReverse
-                      , testIsPalindrome]
+                      , testIsPalindrome
+                      , testFlatten]
 
 -- Problem 1
 testMyLast = TestList [testMyLast1, testMyLast2, testMyLast3]
@@ -81,3 +82,12 @@ testIsPalindrome3 = TestCase (assertEqual "[1,2,4,8,16,8,4,2,1] is a palindrome"
                               True (isPalindrome [1,2,4,8,16,8,4,2,1]))
 
 -- Problem 7
+testFlatten = TestList []
+testFlatten3 = TestCase (assertEqual "[] should flatten to []"
+                          [] (flatten (List [])))
+testFlatten1 = TestCase (assertEqual "[a] should flatten to [a]"
+                          [5] (flatten Elem 5))
+testFlatten2 = TestCase (assertEqual
+                          "[1, [2, [3, 4], 5]] should flatten to [1,2,3,4,5]"
+                          [1,2,3,4,5]
+                          (flatten (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]])))

@@ -1,15 +1,7 @@
 -- Ben Eggers <ben.eggers36@gmail.com>
 -- Problems 1-10
 
-module MyLists
-( myLast
-, myButLast
-, myElementAt
-, myLength
-, myReverse
-, isPalindrome
-, myFlatten
-) where
+module MyLists where
 
 -- 1
 myLast [x] = x
@@ -37,4 +29,4 @@ isPalindrome xs = xs == (myReverse xs)
 
 -- 7
 data NestedList a = Elem a | List [NestedList a]
-myFlatten = 7
+flatten = 8

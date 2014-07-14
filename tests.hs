@@ -5,7 +5,7 @@
 
 module Tests where
 
-import MyLists( myLast, myButLast, myElementAt, myLength, myReverse )
+import MyLists( myLast, myButLast, myElementAt, myLength, myReverse, isPalindrome )
 import Test.HUnit
 
 main = runTestTT all_tests
@@ -16,7 +16,8 @@ test1thru10 = TestList [testMyLast
                       , testMyButLast
                       , testMyElementAt
                       , testMyLength
-                      , testMyReverse]
+                      , testMyReverse
+                      , testIsPalindrome]
 
 -- Problem 1
 testMyLast = TestList [testMyLast1, testMyLast2, testMyLast3]
@@ -58,14 +59,17 @@ testMyLength3 = TestCase (assertEqual "Length of 'hello, world!' should be 13"
                           13 (myLength "hello, world!"))
 
 -- Problem 5
-testMyReverse = TestList []
+testMyReverse = TestList [testMyReverse1, testMyReverse2, testMyReverse3, testMyReverse4]
 testMyReverse1 = TestCase (assertEqual "[1] reversed should be [1]"
                             [1] (myReverse [1]))
 testMyReverse2 = TestCase (assertEqual "[1,2] reversed should be [2,1]"
                             [2,1] (myReverse [1,2]))
 testMyReverse3 = TestCase (assertEqual "['a'..'z'] reversed should be ['z'..'a']"
-                            ['z'..'a'] (myReverse ['a'..'z']))
+                            ['z', 'y'..'a'] (myReverse ['a'..'z']))
 testMyReverse4 = TestCase (assertEqual "'A man, a plan, a canal, panama!' reversed should be \
                             \ '!amanap ,lanac a ,nalp a ,nam A'"
                             "!amanap ,lanac a ,nalp a ,nam A"
                             (myReverse "A man, a plan, a canal, panama!"))
+
+-- Problem 6
+testIsPalindrome = TestList []

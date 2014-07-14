@@ -4,30 +4,39 @@
 module MyLists where
 
 -- 1
-myLast [x] = x
-myLast (x:xs) = myLast xs
+last' [x] = x
+last' (x:xs) = last' xs
 
 -- 2
-myButLast [x, y] = x
-myButLast (x:xs) = myButLast xs
+butLast' [x, y] = x
+butLast' (x:xs) = butLast' xs
 
 -- 3
-myElementAt xs n
+elementAt' xs n
     | n == 1    = head xs
-    | otherwise = myElementAt (tail xs) (n - 1)
+    | otherwise = elementAt' (tail xs) (n - 1)
 
 -- 4
-myLength [] = 0
-myLength (x:xs) = 1 + myLength xs
+length' [] = 0
+length' (x:xs) = 1 + length' xs
 
 -- 5
-myReverse [] = []
-myReverse (x:xs) = (myReverse xs) ++ [x]
+reverse' [] = []
+reverse' (x:xs) = (reverse' xs) ++ [x]
 
 -- 6
-isPalindrome xs = xs == (myReverse xs)
+isPalindrome' xs = xs == (reverse' xs)
 
 -- 7
 data NestedList a = Elem a | List [NestedList a]
-flatten :: NestedList a -> [a]
-flatten list = []
+flatten' :: NestedList a -> [a]
+flatten' list = []
+
+-- 8
+compress' stuff = []
+
+-- 9
+pack' stuff = []
+
+-- 10
+encode' stuff = []

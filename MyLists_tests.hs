@@ -12,80 +12,93 @@ import Test.HUnit
 
 main = runTestTT test1thru10
 
-test1thru10 = TestList [testMyLast
-                      , testMyButLast
-                      , testMyElementAt
-                      , testMyLength
-                      , testMyReverse
+test1thru10 = TestList [testLast
+                      , testButLast
+                      , testElementAt
+                      , testLength
+                      , testReverse
                       , testIsPalindrome
-                      , testFlatten]
+                      , testFlatten
+                      , testCompress
+                      , testPack
+                      , testEncode
+                      ]
 
 -- Problem 1
-testMyLast = TestList [testMyLast1, testMyLast2, testMyLast3]
-testMyLast1 = TestCase (assertEqual "3 should be the last element of [1,2,3]"
-                        3 (myLast [1,2,3]))
-testMyLast2 = TestCase (assertEqual "4 should be the last element of [1,2,3,4]"
-                        4 (myLast [1,2,3,4]))
-testMyLast3 = TestCase (assertEqual "'z' should be the last element of ['x','y','z']"
-                        'z' (myLast ['x','y','z']))
+testLast = TestList [testLast1, testLast2, testLast3]
+testLast1 = TestCase (assertEqual "3 should be the last element of [1,2,3]"
+                        3 (last' [1,2,3]))
+testLast2 = TestCase (assertEqual "4 should be the last element of [1,2,3,4]"
+                        4 (last' [1,2,3,4]))
+testLast3 = TestCase (assertEqual "'z' should be the last element of ['x','y','z']"
+                        'z' (last' ['x','y','z']))
 
 -- Problem 2
-testMyButLast = TestList [testMyButLast1, testMyButLast2, testMyButLast3]
-testMyButLast1 = TestCase (assertEqual "2 should be the 2nd-to-last of [1,2,3]"
-                            2 (myButLast [1,2,3]))
-testMyButLast2 = TestCase (assertEqual "3 should be the 2nd-to-last of [1,2,3,4]"
-                            3 (myButLast [1,2,3,4]))
-testMyButLast3 = TestCase (assertEqual "'y' should be the 2nd-to-last of ['a'..'z']"
-                            'y' (myButLast ['a'..'z']))
+testButLast = TestList [testButLast1, testButLast2, testButLast3]
+testButLast1 = TestCase (assertEqual "2 should be the 2nd-to-last of [1,2,3]"
+                            2 (butLast' [1,2,3]))
+testButLast2 = TestCase (assertEqual "3 should be the 2nd-to-last of [1,2,3,4]"
+                            3 (butLast' [1,2,3,4]))
+testButLast3 = TestCase (assertEqual "'y' should be the 2nd-to-last of ['a'..'z']"
+                            'y' (butLast' ['a'..'z']))
 
 -- Problem 3
-testMyElementAt = TestList [testMyElementAt1, testMyElementAt2
-                          , testMyElementAt3, testMyElementAt4]
-testMyElementAt1 = TestCase (assertEqual "1 should be the first element of [1,2,3]"
-                              1 (myElementAt [1,2,3] 1))
-testMyElementAt2 = TestCase (assertEqual "2 should be the second element of [1,2,3]"
-                              2 (myElementAt [1,2,3] 2))
-testMyElementAt3 = TestCase (assertEqual "3 should be the third element of [1,2,3]"
-                              3 (myElementAt [1,2,3] 3))
-testMyElementAt4 = TestCase (assertEqual "'j' should be the 10th element of ['a'..'z']"
-                              'j' (myElementAt ['a'..'z'] 10))
+testElementAt = TestList [testElementAt1, testElementAt2
+                          , testElementAt3, testElementAt4]
+testElementAt1 = TestCase (assertEqual "1 should be the first element of [1,2,3]"
+                              1 (elementAt' [1,2,3] 1))
+testElementAt2 = TestCase (assertEqual "2 should be the second element of [1,2,3]"
+                              2 (elementAt' [1,2,3] 2))
+testElementAt3 = TestCase (assertEqual "3 should be the third element of [1,2,3]"
+                              3 (elementAt' [1,2,3] 3))
+testElementAt4 = TestCase (assertEqual "'j' should be the 10th element of ['a'..'z']"
+                              'j' (elementAt' ['a'..'z'] 10))
 
 -- Problem 4
-testMyLength = TestList [testMyLength1, testMyLength2, testMyLength3]
-testMyLength1 = TestCase (assertEqual "Length of [] should be 0"
-                          0 (myLength []))
-testMyLength2 = TestCase (assertEqual "Length of [1,2,3] should be 3"
-                          3 (myLength [1,2,3]))
-testMyLength3 = TestCase (assertEqual "Length of 'hello, world!' should be 13"
-                          13 (myLength "hello, world!"))
+testLength = TestList [testLength1, testLength2, testLength3]
+testLength1 = TestCase (assertEqual "Length of [] should be 0"
+                          0 (length' []))
+testLength2 = TestCase (assertEqual "Length of [1,2,3] should be 3"
+                          3 (length' [1,2,3]))
+testLength3 = TestCase (assertEqual "Length of 'hello, world!' should be 13"
+                          13 (length' "hello, world!"))
 
 -- Problem 5
-testMyReverse = TestList [testMyReverse1, testMyReverse2, testMyReverse3, testMyReverse4]
-testMyReverse1 = TestCase (assertEqual "[1] reversed should be [1]"
-                            [1] (myReverse [1]))
-testMyReverse2 = TestCase (assertEqual "[1,2] reversed should be [2,1]"
-                            [2,1] (myReverse [1,2]))
-testMyReverse3 = TestCase (assertEqual "['a'..'z'] reversed should be ['z'..'a']"
-                            ['z', 'y'..'a'] (myReverse ['a'..'z']))
-testMyReverse4 = TestCase (assertEqual "'A man, a plan, a canal, panama!' reversed should be \
+testReverse = TestList [testReverse1, testReverse2, testReverse3, testReverse4]
+testReverse1 = TestCase (assertEqual "[1] reversed should be [1]"
+                            [1] (reverse' [1]))
+testReverse2 = TestCase (assertEqual "[1,2] reversed should be [2,1]"
+                            [2,1] (reverse' [1,2]))
+testReverse3 = TestCase (assertEqual "['a'..'z'] reversed should be ['z'..'a']"
+                            ['z', 'y'..'a'] (reverse' ['a'..'z']))
+testReverse4 = TestCase (assertEqual "'A man, a plan, a canal, panama!' reversed should be \
                             \ '!amanap ,lanac a ,nalp a ,nam A'"
                             "!amanap ,lanac a ,nalp a ,nam A"
-                            (myReverse "A man, a plan, a canal, panama!"))
+                            (reverse' "A man, a plan, a canal, panama!"))
 
 -- Problem 6
 testIsPalindrome = TestList [testIsPalindrome1, testIsPalindrome2, testIsPalindrome3]
 testIsPalindrome1 = TestCase (assertEqual "[1,2,3] is not a palindrome"
-                              False (isPalindrome [1,2,3]))
+                              False (isPalindrome' [1,2,3]))
 testIsPalindrome2 = TestCase (assertEqual "'racecar' is a palindrome"
-                              True (isPalindrome "racecar"))
+                              True (isPalindrome' "racecar"))
 testIsPalindrome3 = TestCase (assertEqual "[1,2,4,8,16,8,4,2,1] is a palindrome"
-                              True (isPalindrome [1,2,4,8,16,8,4,2,1]))
+                              True (isPalindrome' [1,2,4,8,16,8,4,2,1]))
 
 -- Problem 7
 testFlatten = TestList [testFlatten2, testFlatten3]
 testFlatten2 = TestCase (assertEqual "[a] should flatten to [a]"
-                            [5] (flatten (Elem 5)))
+                            [5] (flatten' (Elem 5)))
 testFlatten3 = TestCase (assertEqual
                           "[1, [2, [3, 4], 5]] should flatten to [1,2,3,4,5]"
                           [1,2,3,4,5]
-                          (flatten (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]])))
+                          (flatten' (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]])))
+
+-- Problem 8
+testCompress = TestList []
+
+-- Problem 9
+testPack = TestList []
+
+-- Problem 10
+testEncode = TestList []

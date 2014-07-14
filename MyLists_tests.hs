@@ -86,16 +86,22 @@ testIsPalindrome3 = TestCase (assertEqual "[1,2,4,8,16,8,4,2,1] is a palindrome"
                               True (isPalindrome' [1,2,4,8,16,8,4,2,1]))
 
 -- Problem 7
-testFlatten = TestList [testFlatten2, testFlatten3]
-testFlatten2 = TestCase (assertEqual "[a] should flatten to [a]"
+testFlatten = TestList [testFlatten1, testFlatten2]
+testFlatten1 = TestCase (assertEqual "[a] should flatten to [a]"
                             [5] (flatten' (Elem 5)))
-testFlatten3 = TestCase (assertEqual
+testFlatten2 = TestCase (assertEqual
                           "[1, [2, [3, 4], 5]] should flatten to [1,2,3,4,5]"
                           [1,2,3,4,5]
                           (flatten' (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]])))
 
 -- Problem 8
-testCompress = TestList []
+testCompress = TestList [testCompress1, testCompress2, testCompress3]
+testCompress1 = TestCase (assertEqual "'' should compress to ''"
+                          "" (compress' ""))
+testCompress2 = TestCase (assertEqual "\"aabccdee\" should compress to \"abcde\""
+                          "abcde" (compress' "aabccdee"))
+testCompress3 = TestCase (assertEqual "\"aaaaaabaaabbabaaabbbb\" should compress to \"abababab\""
+                          "abababab" (compress' "aaaaaabaaabbabaaabbbb"))
 
 -- Problem 9
 testPack = TestList []

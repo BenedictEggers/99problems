@@ -33,7 +33,7 @@ flatten' :: NestedList a -> [a]
 flatten' list = []
 
 -- 8
-compress' stuff = []
+compress' stuff = ""
 
 -- 9
 pack' stuff = []

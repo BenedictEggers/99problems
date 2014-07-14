@@ -29,4 +29,5 @@ isPalindrome xs = xs == (myReverse xs)
 
 -- 7
 data NestedList a = Elem a | List [NestedList a]
-flatten = 8
+flatten :: NestedList a -> [a]
+flatten list = []

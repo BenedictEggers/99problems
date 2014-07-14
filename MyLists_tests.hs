@@ -104,7 +104,17 @@ testCompress3 = TestCase (assertEqual "\"aaaaaabaaabbabaaabbbb\" should compress
                           "abababab" (compress' "aaaaaabaaabbabaaabbbb"))
 
 -- Problem 9
-testPack = TestList []
+testPack = TestList [testPack1, testPack2, testPack3]
+testPack1 = TestCase (assertEqual "[1] should pack to [[1]]"
+                      [[1]] (pack' [1]))
+testPack2 = TestCase (assertEqual "[1,1,2,3] should pack to [[1, 1], [2], [3]]"
+                      [[1, 1], [2], [3]] (pack' [1,1,2,3]))
+testPack3 = TestCase (assertEqual "['a', 'a', 'a', 'a', 'b', 'c', 'c', 'a', \
+                                  \ 'a', 'd', 'e', 'e', 'e', 'e'] should pack to \
+                                  \ [\"aaaa\",\"b\",\"cc\",\"aa\",\"d\",\"eeee\"]"
+                      ["aaaa","b","cc","aa","d","eeee"]
+                      (pack' ['a', 'a', 'a', 'a', 'b', 'c', 'c', 'a', 
+                              'a', 'd', 'e', 'e', 'e', 'e']))
 
 -- Problem 10
 testEncode = TestList []

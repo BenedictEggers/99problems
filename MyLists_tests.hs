@@ -117,4 +117,8 @@ testPack3 = TestCase (assertEqual "['a', 'a', 'a', 'a', 'b', 'c', 'c', 'a', \
                               'a', 'd', 'e', 'e', 'e', 'e']))
 
 -- Problem 10
-testEncode = TestList []
+testEncode = TestList [testEncode1]
+testEncode1 = TestCase (assertEqual "\"aaaabccaadeeee\" should encode to \
+                                    \ [(4,'a'),(1,'b'),(2,'c'),(2,'a'),(1,'d'),(4,'e')]"
+                                    [(4,'a'),(1,'b'),(2,'c'),(2,'a'),(1,'d'),(4,'e')]
+                                    (encode' "aaaabccaadeeee"))

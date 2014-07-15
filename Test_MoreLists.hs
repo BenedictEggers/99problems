@@ -74,9 +74,12 @@ testDupli3 = TestCase (assertEqual "[1,1,1] should dupli to [1, 1, 1, 1, 1, 1]")
 
 -- Problem 15
 testRepli = TestList[testRepli1, testRepli2, testRepli]
-testRepli1 = TestCase (assertEqual)
-testRepli2 = TestCase (assertEqual)
-testRepli3 = TestCase (assertEqual)
+testRepli1 = TestCase (assertEqual "repli [1,2,3] 1 should give [1,2,3]"
+                        [1,2,3] (repli [1,2,3]))
+testRepli2 = TestCase (assertEqual "repli \"abc\" 3 should give \"aaabbbccc\""
+                        "aaabbbccc" (repli "abc" 3))
+testRepli3 = TestCase (assertEqual "repli [1] 5 should give [1,1,1,1,1]"
+                        [1,1,1,1,1] (repli [1] 5))
 
 -- Problem 16
 testDropEvery = TestList[testDropEvery1, testDropEvery2, testDropEvery]

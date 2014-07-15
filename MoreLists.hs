@@ -36,10 +36,10 @@ dropEvery xs n = []
 split (xs) n = (take n xs, drop n xs)
 
 -- Problem 18
-slice list start end = take (end - start + 1) $ drop (start - 1) list
+slice xs start end = take (end - start + 1) $ drop (start - 1) xs
 
 -- Problem 19
-rotate xs n = []
+rotate xs n = let (start, end) = split xs n in end ++ start
 
 -- Problem 20
 removeAt n (x:xs) = (x, xs)

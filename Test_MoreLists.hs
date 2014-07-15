@@ -106,9 +106,12 @@ testSlice3 = TestCase (assertEqual "slice [1..10] 1 1 should give [1]"
 
 -- Problem 19
 testRotate = TestList[testRotate1, testRotate2, testRotate3]
-testRotate1 = TestCase (assertEqual)
-testRotate2 = TestCase (assertEqual)
-testRotate3 = TestCase (assertEqual)
+testRotate1 = TestCase (assertEqual "rotate [1..10] 0 should give [1..10]"
+                        [1..10] (rotate [1..10] 0))
+testRotate2 = TestCase (assertEqual "rotate ['a'..'h'] 3 should give \"defghabc\"")
+                        "defghabc" (rotate ['a'..'h'] 3)
+testRotate3 = TestCase (assertEqual "rotate ['a'..'h'] (-2) should give \"ghabcdef\""
+                        "ghabcdef" (rotate ['a'..'h'] (-2)))
 
 -- Problem 20
 testRemoveAt = TestList[testRemoveAt1, testRemoveAt2, testRemoveAt3]

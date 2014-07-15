@@ -16,7 +16,7 @@ encodeModified xs = map fixEncode $ encode' xs
 -- Proble 12
 decodeModified [] = []
 decodeModified (Single x : xs) = x : (decodeModified xs)
-decodeModified (Multiple c x : xs) = take c (repeat x) ++ (decodeModified xs)
+decodeModified (Multiple c x : xs) = (replicate c x) ++ (decodeModified xs)
 
 -- Problem 13
 encodeDirect xs = []
@@ -36,7 +36,7 @@ dropEvery xs n = []
 split (xs) n = (take n xs, drop n xs)
 
 -- Problem 18
-slice list start end = []
+slice list start end = take (end - start + 1) $ drop (start - 1) list
 
 -- Problem 19
 rotate xs n = []

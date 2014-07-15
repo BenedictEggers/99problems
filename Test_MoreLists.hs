@@ -38,9 +38,16 @@ testEncodeModified3 = TestCase (assertEqual "\"aaaabccaadeeee\" should encode \
 -- Problem 2
 testDecodeModified = TestList[testDecodeModified1, testDecodeModified2, testDecodeModified]
 testDecodeModified1 = TestCase (assertEqual "[Single 'a'] should decode to \"a\""
-                                )
-testDecodeModified2 = TestCase (assertEqual)
-testDecodeModified3 = TestCase (assertEqual)
+                                "a" (decodeModified [Single 'a']))
+testDecodeModified2 = TestCase (assertEqual "[Multiple 2 'a', Single 'b'] should \
+                                \ decode to \"aab\""
+                                "aab" (decodeModified [Multiple 2 'a', Single 'b']))
+testDecodeModified3 = TestCase (assertEqual "[Multiple 4 'a', Single 'b', Multiple 2 'c', \
+                                \ Multiple 2 'a', Single 'd', Multiple 4 'e'] should \
+                                \ decode to \"aaaabccaadeeee\""
+                                "aaaabccaadeeee"
+                                (decodeModified [Multiple 4 'a', Single 'b', Multiple 2 'c',
+                                Multiple 2 'a', Single 'd', Multiple 4 'e']))
 
 -- Problem 3
 testEncodeDirect = TestList[testEncodeDirect1, testEncodeDirect2, testEncodeDirect]

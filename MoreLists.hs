@@ -3,6 +3,8 @@
 
 module MoreLists where
 
+data Encoded a = Single a | Multiple Int a
+
 -- Problem 11
 encodeModified xs = []
 

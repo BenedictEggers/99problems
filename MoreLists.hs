@@ -14,7 +14,9 @@ fixEncode (1, x) = Single x
 fixEncode (count, x) = Multiple count x
 
 -- Proble 12
-decodeModified xs = []
+decodeModified [] = []
+decodeModified (Single x : xs) = x : (decodeModified xs)
+decodeModified (Multiple c x : xs) = take c (repeat x) ++ (decodeModified xs)
 
 -- Problem 13
 encodeDirect xs = []

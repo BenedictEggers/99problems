@@ -67,15 +67,15 @@ testEncodeDirect3 = TestCase (assertEqual "\"aaaabccaadeeee\" should encode \
 testDupli = TestList[testDupli1, testDupli2, testDupli3]
 testDupli1 = TestCase (assertEqual "[1] should dupli to [1, 1]"
                         [1, 1] (dupli [1]))
-testDupli2 = TestCase (assertEqual "[1, 2, 3] should dupli to [1, 1, 2, 2, 3, 3]")
-                        [1,1,2,2,3,3] (dupli [1,2,3])
-testDupli3 = TestCase (assertEqual "[1,1,1] should dupli to [1, 1, 1, 1, 1, 1]")
-                        [1,1,1,1,1,1] (dupli [1,1,1])
+testDupli2 = TestCase (assertEqual "[1, 2, 3] should dupli to [1, 1, 2, 2, 3, 3]"
+                        [1,1,2,2,3,3] (dupli [1,2,3]))
+testDupli3 = TestCase (assertEqual "[1,1,1] should dupli to [1, 1, 1, 1, 1, 1]"
+                        [1,1,1,1,1,1] (dupli [1,1,1]))
 
 -- Problem 15
 testRepli = TestList[testRepli1, testRepli2, testRepli3]
 testRepli1 = TestCase (assertEqual "repli [1,2,3] 1 should give [1,2,3]"
-                        [1,2,3] (repli [1,2,3]))
+                        [1,2,3] (repli [1,2,3] 1))
 testRepli2 = TestCase (assertEqual "repli \"abc\" 3 should give \"aaabbbccc\""
                         "aaabbbccc" (repli "abc" 3))
 testRepli3 = TestCase (assertEqual "repli [1] 5 should give [1,1,1,1,1]"
@@ -83,17 +83,17 @@ testRepli3 = TestCase (assertEqual "repli [1] 5 should give [1,1,1,1,1]"
 
 -- Problem 16
 testDropEvery = TestList[testDropEvery1, testDropEvery2, testDropEvery3]
-testDropEvery1 = TestCase (assertEqual "dropEvery \"aoeu\" 1 should give the empty list")
-                            [] (dropEvery "aoeu" 1)
-testDropEvery2 = TestCase (assertEqual "dropEvery \"abcdefghik\" 3 should give \"abdeghk\"")
-                            "abdeghk" (dropEvery "abcdefghik" 3)
+testDropEvery1 = TestCase (assertEqual "dropEvery \"aoeu\" 1 should give the empty list"
+                            ([]::[()]) (dropEvery "aoeu" 1))
+testDropEvery2 = TestCase (assertEqual "dropEvery \"abcdefghik\" 3 should give \"abdeghk\""
+                            "abdeghk" (dropEvery "abcdefghik" 3))
 testDropEvery3 = TestCase (assertEqual "dropEvery [1,2,3] 4 should give [1,2,3]"
                             [1,2,3] (dropEvery [1,2,3] 4))
 
 -- Problem 17
-testSplit = TestList[testSplit3]
-testSplit1 = TestCase (assertEqual "split \"abcdefghik\" 3 should give (\"abc\", \"defghik\")")
-                        ("abc", "defghik") (split "abcdefghik" 3)
+testSplit = TestList[testSplit1]
+testSplit1 = TestCase (assertEqual "split \"abcdefghik\" 3 should give (\"abc\", \"defghik\")"
+                        ("abc", "defghik") (split "abcdefghik" 3))
 
 -- Problem 18
 testSlice = TestList[testSlice1, testSlice2, testSlice3]
@@ -108,8 +108,8 @@ testSlice3 = TestCase (assertEqual "slice [1..10] 1 1 should give [1]"
 testRotate = TestList[testRotate1, testRotate2, testRotate3]
 testRotate1 = TestCase (assertEqual "rotate [1..10] 0 should give [1..10]"
                         [1..10] (rotate [1..10] 0))
-testRotate2 = TestCase (assertEqual "rotate ['a'..'h'] 3 should give \"defghabc\"")
-                        "defghabc" (rotate ['a'..'h'] 3)
+testRotate2 = TestCase (assertEqual "rotate ['a'..'h'] 3 should give \"defghabc\""
+                        "defghabc" (rotate ['a'..'h'] 3))
 testRotate3 = TestCase (assertEqual "rotate ['a'..'h'] (-2) should give \"ghabcdef\""
                         "ghabcdef" (rotate ['a'..'h'] (-2)))
 

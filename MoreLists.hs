@@ -15,7 +15,8 @@ decodeModified xs = []
 encodeDirect xs = []
 
 -- Problem 14
-dupli xs = []
+dupli [] = []
+dupli (x:xs) = x : x : (dupli xs)
 
 -- Problem 15
 repli xs n= []

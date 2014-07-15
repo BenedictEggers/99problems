@@ -3,7 +3,7 @@
 
 module MoreLists where
 
-data Encoded a = Single a | Multiple Int a
+data Encoded a = Single a | Multiple Int a deriving (Show, Eq)
 
 -- Problem 11
 encodeModified xs = []
@@ -24,7 +24,7 @@ repli xs n= []
 dropEvery xs n = []
 
 -- Problem 17
-split xs n = []
+split (x:xs) n = ([x], xs)
 
 -- Problem 18
 slice list start end = []
@@ -33,4 +33,4 @@ slice list start end = []
 rotate xs n = []
 
 -- Problem 20
-removeAt n xs = []
+removeAt n (x:xs) = (x, xs)

@@ -41,7 +41,8 @@ compress' (x:xs)
     | otherwise     = x : (compress' xs)
 
 -- Problem 9
-pack' xs = []
+pack' [] = []
+pack' xs@(x:_) = (takeWhile (== x) xs) : (pack' (dropWhile (== x) xs))
 
 -- Problem 10
 encode' stuff = []

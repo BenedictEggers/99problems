@@ -122,4 +122,4 @@ testRemoveAt1 = TestCase (assertEqual "removeAt 2 \"abcd\" should give ('b', \"a
 testRemoveAt2 = TestCase (assertEqual "removeAt 1 [1..10] should give (1, [2..10])"
                             (1, [2..10]) (removeAt 1 [1..10]))
 testRemoveAt3 = TestCase (assertEqual "removeAt 6 [1..10] should give (6, [1..5]++[7..10])"
-                            (6, [1..5]++[6..10]) (removeAt 6 [1..10]))
+                            (6, [1..5]++[7..10]) (removeAt 6 [1..10]))

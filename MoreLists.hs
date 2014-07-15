@@ -33,7 +33,7 @@ repli (x:xs) n = (replicate n x) ++ (repli xs n)
 dropEvery xs n = []
 
 -- Problem 17
-split (xs) n = (take n xs, drop n xs)
+split xs n = (take n xs, drop n xs)
 
 -- Problem 18
 slice xs start end = take (end - start + 1) $ drop (start - 1) xs
@@ -44,4 +44,4 @@ rotate xs n
     | otherwise = reverse $ rotate (reverse xs) (-n)
 
 -- Problem 20
-removeAt n (x:xs) = (x, xs)
+removeAt n xs = (xs !! (n - 1), (slice xs 1 (n - 1)) ++ (slice xs (n + 1) (length xs)))

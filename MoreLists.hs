@@ -26,7 +26,7 @@ repli (x:xs) n = take n (repeat x) ++ (repli xs n)
 dropEvery xs n = []
 
 -- Problem 17
-split (x:xs) n = ([x], xs)
+split (xs) n = (take n xs, drop n xs)
 
 -- Problem 18
 slice list start end = []

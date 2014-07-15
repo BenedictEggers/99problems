@@ -39,7 +39,9 @@ split (xs) n = (take n xs, drop n xs)
 slice xs start end = take (end - start + 1) $ drop (start - 1) xs
 
 -- Problem 19
-rotate xs n = let (start, end) = split xs n in end ++ start
+rotate xs n
+    | n >= 0 = let (start, end) = split xs n in end ++ start
+    | otherwise = reverse $ rotate (reverse xs) (-n)
 
 -- Problem 20
 removeAt n (x:xs) = (x, xs)

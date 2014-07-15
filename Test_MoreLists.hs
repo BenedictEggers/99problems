@@ -115,6 +115,9 @@ testRotate3 = TestCase (assertEqual "rotate ['a'..'h'] (-2) should give \"ghabcd
 
 -- Problem 20
 testRemoveAt = TestList[testRemoveAt1, testRemoveAt2, testRemoveAt3]
-testRemoveAt1 = TestCase (assertEqual)
-testRemoveAt2 = TestCase (assertEqual)
-testRemoveAt3 = TestCase (assertEqual)
+testRemoveAt1 = TestCase (assertEqual "removeAt 2 \"abcd\" should give ('b', \"acd\")"
+                            ('b', "acd") (removeAt 2 "abcd"))
+testRemoveAt2 = TestCase (assertEqual "removeAt 1 [1..10] should give (1, [2..10])"
+                            (1, [2..10]) (removeAt 1 [1..10]))
+testRemoveAt3 = TestCase (assertEqual "removeAt 6 [1..10] should give (6, [1..5]++[7..10])"
+                            (6, [1..5]++[6..10]) (removeAt 6 [1..10]))

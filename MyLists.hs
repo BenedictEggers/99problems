@@ -45,4 +45,4 @@ pack' [] = []
 pack' xs@(x:_) = (takeWhile (== x) xs) : (pack' (dropWhile (== x) xs))
 
 -- Problem 10
-encode' stuff = []
+encode' xs = map (\ys -> (length ys, head ys)) $ pack' xs

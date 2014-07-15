@@ -27,7 +27,7 @@ dupli (x:xs) = x : x : (dupli xs)
 
 -- Problem 15
 repli [] n = []
-repli (x:xs) n = take n (repeat x) ++ (repli xs n)
+repli (x:xs) n = (replicate n x) ++ (repli xs n)
 
 -- Problem 16
 dropEvery xs n = []

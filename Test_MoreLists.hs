@@ -51,9 +51,17 @@ testDecodeModified3 = TestCase (assertEqual "[Multiple 4 'a', Single 'b', Multip
 
 -- Problem 3
 testEncodeDirect = TestList[testEncodeDirect1, testEncodeDirect2, testEncodeDirect]
-testEncodeDirect1 = TestCase (assertEqual)
-testEncodeDirect2 = TestCase (assertEqual)
-testEncodeDirect3 = TestCase (assertEqual)
+testEncodeDirect1 = TestCase (assertEqual "\"a\" should encode to [Single 'a']"
+                                [Single 'a'] (encodeDirect "a"))
+testEncodeDirect2 = TestCase (assertEqual "\"aab\" should encode to \
+                                \ [Multiple 2 'a', Single 'b']"
+                                [Multiple 2 'a', Single 'b'] (encodeDirect "aab"))
+testEncodeDirect3 = TestCase (assertEqual "\"aaaabccaadeeee\" should encode \
+                                \ to [Multiple 4 'a',Single 'b',Multiple 2 'c', \
+                                \ Multiple 2 'a',Single 'd',Multiple 4 'e']"
+                                [Multiple 4 'a', Single 'b', Multiple 2 'c',
+                                Multiple 2 'a', Single 'd', Multiple 4 'e']
+                                (encodeDirect "aaaabccaadeeee"))
 
 -- Problem 4
 testDupli = TestList[testDupli1, testDupli2, testDupli]

@@ -83,9 +83,12 @@ testRepli3 = TestCase (assertEqual "repli [1] 5 should give [1,1,1,1,1]"
 
 -- Problem 16
 testDropEvery = TestList[testDropEvery1, testDropEvery2, testDropEvery]
-testDropEvery1 = TestCase (assertEqual)
-testDropEvery2 = TestCase (assertEqual)
-testDropEvery3 = TestCase (assertEqual)
+testDropEvery1 = TestCase (assertEqual "dropEvery \"aoeu\" 1 should give the empty list")
+                            [] (dropEvery "aoeu" 1)
+testDropEvery2 = TestCase (assertEqual "dropEvery \"abcdefghik\" 3 should give \"abdeghk\"")
+                            "abdeghk" (dropEvery "abcdefghik" 3)
+testDropEvery3 = TestCase (assertEqual "dropEvery [1,2,3] 4 should give [1,2,3]"
+                            [1,2,3] (dropEvery [1,2,3] 4))
 
 -- Problem 17
 testSplit = TestList[testSplit1, testSplit2, testSplit]

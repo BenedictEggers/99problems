@@ -10,6 +10,8 @@ module Test_MoreLists where
 import MoreLists
 import Test.HUnit
 
+main = runTestTT test11thru20
+
 test11thru20 = TestList [testEncodeModified
                         , testDecodeModified
                         , testEncodeDirect

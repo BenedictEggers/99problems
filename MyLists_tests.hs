@@ -86,10 +86,12 @@ testIsPalindrome3 = TestCase (assertEqual "[1,2,4,8,16,8,4,2,1] is a palindrome"
                               True (isPalindrome' [1,2,4,8,16,8,4,2,1]))
 
 -- Problem 7
-testFlatten = TestList [testFlatten1, testFlatten2]
-testFlatten1 = TestCase (assertEqual "[a] should flatten to [a]"
-                            [5] (flatten' (Elem 5)))
-testFlatten2 = TestCase (assertEqual
+testFlatten = TestList [testFlatten1, testFlatten2, testFlatten3]
+testFlatten1 = TestCase (assertEqual "[5] should flatten to [5]"
+                          [5] (flatten' (Elem 5)))
+testFlatten2 = TestCase (assertEqual "[1, [2, 3]] should flatten to [1, 2, 3]"
+                          [1,2,3] (flatten' (List [Elem 1, List [Elem 2, Elem 3]])))
+testFlatten3 = TestCase (assertEqual
                           "[1, [2, [3, 4], 5]] should flatten to [1,2,3,4,5]"
                           [1,2,3,4,5]
                           (flatten' (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]])))

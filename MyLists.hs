@@ -29,17 +29,19 @@ isPalindrome' xs = xs == (reverse' xs)
 
 -- Problem 7
 data NestedList a = Elem a | List [NestedList a]
-flatten' list = []
+flatten' :: NestedList a -> [a]
+flatten' (Elem x) = [x]
+flatten' (List xs) = concatMap flatten' xs
 
 -- Problem 8
 compress' [] = []
 compress' [x] = [x]
 compress' (x:xs)
-    | x == head xs    = compress' xs
-    | otherwise       = x : (compress' xs)
+    | x == head xs  = compress' xs
+    | otherwise     = x : (compress' xs)
 
 -- Problem 9
-pack' stuff = []
+pack' xs = []
 
 -- Problem 10
 encode' stuff = []

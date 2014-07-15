@@ -97,9 +97,12 @@ testSplit1 = TestCase (assertEqual "split \"abcdefghik\" 3 should give (\"abc\",
 
 -- Problem 18
 testSlice = TestList[testSlice1, testSlice2, testSlice3]
-testSlice1 = TestCase (assertEqual)
-testSlice2 = TestCase (assertEqual)
-testSlice3 = TestCase (assertEqual)
+testSlice1 = TestCase (assertEqual "slice ['a'..'z'] 3 7 should give \"cdefg\""
+                        "cdefg " (slice ['a'..'z'] 3 7))
+testSlice2 = TestCase (assertEqual "slice [1..10] 1 10 should give [1..10]"
+                        [1..10] (slice [1..10] 1 10))
+testSlice3 = TestCase (assertEqual "slice [1..10] 1 1 should give [1]"
+                        [1] (slice [1..10] 1 1))
 
 -- Problem 19
 testRotate = TestList[testRotate1, testRotate2, testRotate3]

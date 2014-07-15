@@ -3,10 +3,15 @@
 
 module MoreLists where
 
+import MyLists( encode' )
+
 data Encoded a = Single a | Multiple Int a deriving (Show, Eq)
 
 -- Problem 11
-encodeModified xs = []
+encodeModified xs = map fixEncode $ encode' xs
+
+fixEncode (1, x) = Single x
+fixEncode (count, x) = Multiple count x
 
 -- Proble 12
 decodeModified xs = []

@@ -5,7 +5,7 @@
 
  --TODO: Auto-populate test lists?
 
-module MyLists_tests (test1thru10) where
+module Test_MyLists (test1thru10) where
 
 import MyLists
 import Test.HUnit

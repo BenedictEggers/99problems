@@ -9,9 +9,9 @@ import Test.Framework
 import Test.Framework.Providers.QuickCheck2
 import Test.Framework.Providers.HUnit
 
-import Test_MyLists( test1thru10 )
-import Test_MoreLists( test11thru20 )
---import Test_EvenMoreLists ( test21thru28 )
+import MyListsTests( test1thru10 )
+import MoreListsTests( test11thru20 )
+--import EvenMoreListsTests ( test21thru28 )
 
 main = defaultMain tests
 

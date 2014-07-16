@@ -1,7 +1,7 @@
 -- Ben Eggers <ben.eggers36@gmail.com>
 -- Tests for problems 11-20.
 
-module Test_MoreLists where
+module MoreListsTests where
 
 import MoreLists
 import Test.HUnit

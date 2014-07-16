@@ -1,7 +1,7 @@
 -- Ben Eggers
 -- Problem 21-28 tests
 
-module Test_EvenMoreLists where
+module EvenMoreListsTests where
 
 import EvenMoreLists
 import Test.HUnit

@@ -1,7 +1,7 @@
 -- Ben Eggers <ben.eggers36@gmail.com>
 -- Tests for problems 1-10.
 
-module Test_MyLists (test1thru10) where
+module MyListsTests (test1thru10) where
 
 import MyLists
 import Test.HUnit

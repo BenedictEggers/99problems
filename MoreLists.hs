@@ -19,7 +19,11 @@ decodeModified (Single x : xs) = x : (decodeModified xs)
 decodeModified (Multiple c x : xs) = (replicate c x) ++ (decodeModified xs)
 
 -- Problem 13
-encodeDirect xs = []
+encodeDirect [] = []
+encodeDirect (x:xs) = fixOnes (length (takeWhile (==x) xs)+1, x) :
+                                  encodeDirect (dropWhile (==x) xs)
+                      where fixOnes (1, x) = Single x
+                            fixOnes (c, x) = Multiple c x
 
 -- Problem 14
 dupli [] = []

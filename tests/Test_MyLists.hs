@@ -1,9 +1,5 @@
 -- Ben Eggers <ben.eggers36@gmail.com>
--- Tests for problems 1-10. Note: I think this test harness isn't laid out
--- in the proper HUnit style, but I couldn't find accessible guides online. Drop
--- me a line if you have constructive criticism.
-
- --TODO: Auto-populate test lists?
+-- Tests for problems 1-10.
 
 module Test_MyLists (test1thru10) where
 

@@ -34,7 +34,11 @@ repli [] n = []
 repli (x:xs) n = (replicate n x) ++ (repli xs n)
 
 -- Problem 16
-dropEvery xs n = []
+dropEvery [] n = []
+dropEvery xs n = dropHelper xs n n
+                where dropHelper [] _ _ = []
+                      dropHelper (x:xs) 1 n = dropHelper xs n n
+                      dropHelper (x:xs) c n = x : (dropHelper xs (c-1) n)
 
 -- Problem 17
 split xs n = (take n xs, drop n xs)

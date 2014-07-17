@@ -12,7 +12,7 @@ insertAt y (x:xs) n
     | otherwise = x:(insertAt y xs (n - 1))
 
 -- Problem 22
-range bot top
-    | bot > top = reverse (range top bot)
+range' bot top
+    | bot > top = reverse (range' top bot)
     | bot == top = [top]
-    | bot < top  = bot:range (bot + 1) top
+    | bot < top  = bot:range' (bot + 1) top

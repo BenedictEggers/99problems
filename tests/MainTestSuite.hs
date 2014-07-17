@@ -42,6 +42,10 @@ prop_rotateLengthInvariant xs n = length (rotate xs n) == length xs
 prop_rotateLengthXs :: [Int] -> Bool
 prop_rotateLengthXs xs = rotate xs (length xs) == xs
 
+prop_rangeLength :: Int -> Int -> Bool
+prop_rangeLength bot top = length (range bot top) == ((top - bot) + 1)
+
+
 -- The tests themselves
 tests :: [TF.Test]
 tests = 
@@ -257,5 +261,19 @@ tests =
           (1:[1..10] @=? insertAt 1 [1..10] 2),
       testCase "insertAt 444 [1..10] 9 should be [1..8] ++ [444, 9, 10]"
           ([1..8] ++ [444, 9, 10] @=? insertAt 444 [1..10] 9)
+    ],
+
+    testGroup "range (Problem 22)" [
+      testCase "range 1 1 should be [1]"
+          ([1] @=? range 1 1),
+      testCase "range 100 100 should be [100]"
+          ([100] @=? range 100 100),
+      testCase "range 1 10 should be [1..10]"
+          ([1..10] @=? range 1 10),
+      testCase "range 4 99 should be [4..99]"
+          ([4..99] @=? range 4 99),
+      testCase "range -2 2 should be [-2..2]"
+          ([-2..2] @=? range (-2) 2),
+      testProperty "range should have the right lengths" prop_rangeLength
     ]
   ]

@@ -16,6 +16,32 @@ import MoreLists
 
 main = defaultMain tests
 
+-- Properties to test
+prop_doubleReverse :: [Int] -> Bool
+prop_doubleReverse xs = reverse' (reverse' xs) == xs
+
+prop_compress :: [Int] -> Bool
+prop_compress xs = length (compress' xs) <= length xs
+
+prop_decodeEncodeModified :: [Int] -> Bool
+prop_decodeEncodeModified xs = decodeModified (encodeModified xs) == xs
+
+prop_decodeEncodeDirect :: [Int] -> Bool
+prop_decodeEncodeDirect xs = decodeModified (encodeDirect xs) == xs
+
+prop_encodes :: [Int] -> Bool
+prop_encodes xs = encodeModified xs == encodeDirect xs
+
+prop_dupli :: [Int] -> Bool
+prop_dupli xs = length (dupli xs) == 2 * length xs
+
+prop_rotateLengthInvariant :: [Int] -> Int -> Bool
+prop_rotateLengthInvariant xs n = length (rotate xs n) == length xs
+
+prop_rotateLengthXs :: [Int] -> Bool
+prop_rotateLengthXs xs = rotate xs (length xs) == xs
+
+-- The tests themselves
 tests :: [TF.Test]
 tests = 
   [
@@ -66,7 +92,8 @@ tests =
           (['z', 'y'..'a'] @=? reverse' ['a'..'z']),
       testCase "'A man, a plan, a canal, panama!' reversed should be \
                 \ '!amanap ,lanac a ,nalp a ,nam A'"
-          ("!amanap ,lanac a ,nalp a ,nam A" @=? reverse' "A man, a plan, a canal, panama!")
+          ("!amanap ,lanac a ,nalp a ,nam A" @=? reverse' "A man, a plan, a canal, panama!"),
+      testProperty "Double reversal is the identity" prop_doubleReverse
     ],
 
     testGroup "isPalindrome' (problem 6)" [
@@ -94,7 +121,8 @@ tests =
       testCase "\"aabccdee\" should compress to \"abcde\""
           ("abcde" @=? compress' "aabccdee"),
       testCase "\"aaaaaabaaabbabaaabbbb\" should compress to \"abababab\""
-          ("abababab" @=? compress' "aaaaaabaaabbabaaabbbb")
+          ("abababab" @=? compress' "aaaaaabaaabbabaaabbbb"),
+      testProperty "Compress length property" prop_compress
     ],
 
     testGroup "pack' (problem 9)" [
@@ -153,13 +181,20 @@ tests =
           encodeDirect "aaaabccaadeeee")
     ],
 
+    testGroup "Encode/decode invariants" [
+      testProperty "encodeModified and encodeDirect should be the same" prop_encodes,
+      testProperty "decodeModified encodeModified is the identity" prop_decodeEncodeModified,
+      testProperty "decodeModified encodeDirect is the identity" prop_decodeEncodeDirect
+    ],
+
     testGroup "dupli (problem 14)" [
       testCase "[1] should dupli to [1, 1]"
           ([1, 1] @=? dupli [1]),
       testCase "[1, 2, 3] should dupli to [1, 1, 2, 2, 3, 3]" 
           ([1,1,2,2,3,3] @=? dupli [1,2,3]),
       testCase "[1,1,1] should dupli to [1, 1, 1, 1, 1, 1]" 
-          ([1,1,1,1,1,1] @=? dupli [1,1,1])
+          ([1,1,1,1,1,1] @=? dupli [1,1,1]),
+      testProperty "dupli should double the length" prop_dupli
     ],
 
     testGroup "repli (Problem 15)" [
@@ -200,7 +235,9 @@ tests =
       testCase "rotate ['a'..'h'] 3 should give \"defghabc\""
           ("defghabc" @=? rotate ['a'..'h'] 3),
       testCase "rotate ['a'..'h'] (-2) should give \"ghabcdef\""
-          ("ghabcdef" @=? rotate ['a'..'h'] (-2))
+          ("ghabcdef" @=? rotate ['a'..'h'] (-2)),
+      testProperty "length after rotate shouldn't change" prop_rotateLengthInvariant,
+      testProperty "rotate (length xs) is the identity" prop_rotateLengthXs
     ],
 
     testGroup "removeAt (Problem 20)" [

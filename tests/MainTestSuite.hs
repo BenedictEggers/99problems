@@ -13,6 +13,7 @@ import Test.QuickCheck
 
 import MyLists
 import MoreLists
+import EvenMoreLists
 
 main = defaultMain tests
 
@@ -247,5 +248,14 @@ tests =
           ((1, [2..10]) @=? removeAt 1 [1..10]),
       testCase "removeAt 6 [1..10] should give (6, [1..5]++[7..10])"
           ((6, [1..5]++[7..10]) @=? removeAt 6 [1..10])
+    ],
+
+    testGroup "insertAt (Problem 21)" [
+      testCase "insertAt 1 [] 1 should be [1]"
+          ([1] @=? insertAt 1 [] 1),
+      testCase "insertAt 1 [1..10] 2 should be 1:[1..10]"
+          (1:[1..10] @=? insertAt 1 [1..10] 2),
+      testCase "insertAt 444 [1..10] 9 should be [1..8] ++ [444, 9, 10]"
+          ([1..8] ++ [444, 9, 10] @=? insertAt 444 [1..10] 9)
     ]
   ]

@@ -29,5 +29,7 @@ range' bot top
 -- Problem 26
 combinations :: Int -> [a] -> [[a]]
 combinations _ [] = []
-combinations 0 _ = []
-combinations n (x:xs) = (map ([x]++) (combinations (n-1) xs)) ++ (combinations n xs)
+combinations n (x:xs) 
+    | n < 1 = error "She doesn't even go here!"
+    | n == 0 = []
+    | otherwise = (map (x:) (combinations (n-1) xs)) ++ (combinations n xs)

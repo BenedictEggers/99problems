@@ -45,6 +45,12 @@ prop_rotateLengthXs xs = rotate xs (length xs) == xs
 prop_rangeLength bot top = not ((abs bot > 10000) || (abs top > 10000)) ==>
   length (range' bot top) == (abs (top - bot) + 1)
 
+prop_combinations :: Int -> [Int] -> Property
+prop_combinations n xs = n > 0 && n < 10 ==>
+  length (combinations n xs) == choose (length xs) n
+    where choose n k = factorial n `div` (factorial k * factorial (n-k))
+          factorial 0 = 1
+          factorial n = n * factorial (n - 1)
 
 -- The tests themselves
 tests :: [TF.Test]
@@ -275,5 +281,9 @@ tests =
       testCase "range -2 2 should be [-2..2]"
           ([-2..2] @=? range' (-2) 2),
       testProperty "range should have the right lengths" prop_rangeLength
+    ],
+
+    testGroup "combinations (problem 26)" [
+      testProperty "combinations n xs should be C(length xs) n" prop_combinations
     ]
   ]

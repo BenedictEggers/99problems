@@ -16,3 +16,18 @@ range' bot top
     | bot > top = reverse (range' top bot)
     | bot == top = [top]
     | bot < top  = bot:range' (bot + 1) top
+
+-- Problem 23
+
+
+-- Problem 24
+
+
+-- Problem 25
+
+
+-- Problem 26
+combinations :: Int -> [a] -> [[a]]
+combinations _ [] = []
+combinations 0 _ = []
+combinations n (x:xs) = (map ([x]++) (combinations (n-1) xs)) ++ (combinations n xs)

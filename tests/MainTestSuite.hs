@@ -52,6 +52,15 @@ prop_combinations n xs = n > 0 ==>
           factorial 0 = 1
           factorial n = n * factorial (n - 1)
 
+prop_lsort_sorted :: [[Int]] -> Bool
+prop_lsort_sorted xs = sorted xs
+  where sorted [] = True
+        sorted [x] = True
+        sorted (x:xs) = x <= head xs && sorted xs
+
+prop_lsorted_length :: [[Int]] -> Bool
+prop_lsorted_length xs = (length $ lsort xs) == length xs
+
 -- The tests themselves
 tests :: [TF.Test]
 tests = 
@@ -289,5 +298,16 @@ tests =
       testCase "combinations 2 [1..3] should be the correct 3"
           ([[1,2], [1,3], [2,3]] @=? combinations 2 [1..3])
       --testProperty "combinations n xs should be C(length xs) n" prop_combinations
+    ],
+
+    testGroup "lsort (problem 28, sorting based on sublist length)" [
+      testCase "lsort [[1], [1, 2]] should give [[1], [1,2]]"
+          ([[1],[1,2]] @=? lsort [[1], [1, 2]]),
+      testCase "lsort [[1], [1,2,3], [1,2]] should give [[1], [1,2], [1,2,3]]"
+          ([[1], [1,2], [1,2,3]] @=? lsort [[1], [1,2,3], [1,2]]),
+      testCase "lsort [[2,2,2], [1]] should give [[1],[2,2,2]]"
+          ([[1], [2,2,2]] @=? lsort [[2,2,2], [1]]),
+      testProperty "lsort shouldn't change length" prop_lsorted_length,
+      testProperty "lsort should be...sorted" prop_lsort_sorted
     ]
   ]

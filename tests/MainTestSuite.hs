@@ -48,18 +48,20 @@ prop_rangeLength bot top = not ((abs bot > 10000) || (abs top > 10000)) ==>
 prop_combinations :: Int -> [Int] -> Property
 prop_combinations n xs = n > 0 ==>
   length (combinations n xs) == choose (length xs) n
-    where choose n k = factorial n `div` (factorial k * factorial (n-k))
-          factorial 0 = 1
-          factorial n = n * factorial (n - 1)
+    where
+      choose n k = factorial n `div` (factorial k * factorial (n-k))
+      factorial 0 = 1
+      factorial n = n * factorial (n - 1)
 
 prop_lsorted_length :: [[Int]] -> Bool
 prop_lsorted_length xs = (length $ lsort xs) == length xs
 
 prop_lsort_sorted :: [[Int]] -> Bool
-prop_lsort_sorted xs = sorted xs
-  where sorted [] = True
-        sorted [x] = True
-        sorted (x:xs) = (length x) <= (length $ head xs) && sorted xs
+prop_lsort_sorted xs = sorted $ lsort xs
+  where 
+    sorted [] = True
+    sorted [x] = True
+    sorted (x:xs) = (length x) <= (length $ head xs) && sorted xs
 
 -- The tests themselves
 tests :: [TF.Test]

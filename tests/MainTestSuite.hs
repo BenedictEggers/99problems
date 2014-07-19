@@ -52,14 +52,14 @@ prop_combinations n xs = n > 0 ==>
           factorial 0 = 1
           factorial n = n * factorial (n - 1)
 
+prop_lsorted_length :: [[Int]] -> Bool
+prop_lsorted_length xs = (length $ lsort xs) == length xs
+
 prop_lsort_sorted :: [[Int]] -> Bool
 prop_lsort_sorted xs = sorted xs
   where sorted [] = True
         sorted [x] = True
-        sorted (x:xs) = x <= head xs && sorted xs
-
-prop_lsorted_length :: [[Int]] -> Bool
-prop_lsorted_length xs = (length $ lsort xs) == length xs
+        sorted (x:xs) = (length x) <= (length $ head xs) && sorted xs
 
 -- The tests themselves
 tests :: [TF.Test]

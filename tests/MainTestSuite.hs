@@ -46,7 +46,7 @@ prop_rangeLength bot top = not ((abs bot > 10000) || (abs top > 10000)) ==>
   length (range' bot top) == (abs (top - bot) + 1)
 
 prop_combinations :: Int -> [Int] -> Property
-prop_combinations n xs = n > 0 ==>
+prop_combinations n xs = n > 0 && n < length xs ==>
   length (combinations n xs) == choose (length xs) n
     where
       choose n k = factorial n `div` (factorial k * factorial (n-k))
@@ -298,8 +298,8 @@ tests =
       testCase "combinations 1 [1..3] should be [[1], [2], [3]]"
           ([[1],[2],[3]] @=? combinations 1 [1..3]),
       testCase "combinations 2 [1..3] should be the correct 3"
-          ([[1,2], [1,3], [2,3]] @=? combinations 2 [1..3])
-      --testProperty "combinations n xs should be C(length xs) n" prop_combinations
+          ([[1,2], [1,3], [2,3]] @=? combinations 2 [1..3]),
+      testProperty "combinations n xs should be C(length xs) n" prop_combinations
     ],
 
     testGroup "lsort (problem 28, sorting based on sublist length)" [
@@ -311,5 +311,12 @@ tests =
           ([[1], [2,2,2]] @=? lsort [[2,2,2], [1]]),
       testProperty "lsort shouldn't change length" prop_lsorted_length,
       testProperty "lsort should be...sorted" prop_lsort_sorted
+    ],
+
+    testGroup "lfsort (problem 28b)" [
+      testCase "lfsort [\"abc\", \"de\", \"fgh\", \"de\", \"ijkl\", \"mn\", \"o\"] \
+                \ should give [\"o\",\"ijkl\",\"abc\",\"fgh\",\"de\",\"de\",\"mn\"]"
+          (["o","ijkl","abc","fgh","de","de","mn"] @=?
+            lfsort ["abc","de","fgh","de","ijkl","mn","o"])
     ]
   ]

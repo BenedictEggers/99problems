@@ -3,6 +3,7 @@
 
 module EvenMoreLists where
 
+
 -- Problem 21
 insertAt y [] 1 = [y]
 insertAt y [] _ = error "That doesn't even make sense"
@@ -35,11 +36,17 @@ combinations n (x:xs) = (map (x:) (combinations (n-1) xs)) ++ combinations n xs
 -- Problem 27
 
 
--- Problem 28
+-- Problem 28a
 lsort :: [[a]] -> [[a]]
 lsort [] = []
-lsort [x] = [x]
-lsort (x:xs) = (lsort (filter (\l -> length l < lex) xs)) ++
+lsort (x:xs) = (lsort (filter (\l -> length l < length x) xs)) ++
                [x] ++
-               (lsort (filter (\l -> length l >= lex) xs))
-    where lex = length x
+               (lsort (filter (\l -> length l >= length x) xs))
+
+-- Problem 28b
+lfsort :: [[a]] -> [[a]]
+lfsort xs = concat $ lsort (groupByLength (lsort xs))
+    where groupByLength [] = []
+          groupByLength (x:xs) =
+            (x : (takeWhile (\l -> length l == length x) xs)) :
+            groupByLength (dropWhile (\l -> length l == length x) xs)

@@ -46,7 +46,7 @@ prop_rangeLength bot top = not ((abs bot > 10000) || (abs top > 10000)) ==>
   length (range' bot top) == (abs (top - bot) + 1)
 
 prop_combinations :: Int -> [Int] -> Property
-prop_combinations n xs = n > 0 && n < 10 ==>
+prop_combinations n xs = n > 0 && n < 20 ==>
   length (combinations n xs) == choose (length xs) n
     where choose n k = factorial n `div` (factorial k * factorial (n-k))
           factorial 0 = 1
@@ -284,6 +284,10 @@ tests =
     ],
 
     testGroup "combinations (problem 26)" [
+      testCase "combinations 1 [1..3] should be [[1], [2], [3]]"
+          ([[1],[2],[3]] @=? combinations 1 [1..3]),
+      testCase "combinations 2 [1..3] should be the correct 3"
+          ([[1,2], [1,3], [2,3]] @=? combinations 2 [1..3]),
       testProperty "combinations n xs should be C(length xs) n" prop_combinations
     ]
   ]

@@ -28,8 +28,18 @@ range' bot top
 
 -- Problem 26
 combinations :: Int -> [a] -> [[a]]
+combinations 0 _ = [[]]
 combinations _ [] = []
-combinations n ys@(x:xs) 
-    | n < 1 = error "She doesn't even go here!"
-    | n == 1 = map (:[]) ys
-    | otherwise = (map (x:) (combinations (n-1) xs)) ++ (combinations n xs)
+combinations n (x:xs) = (map (x:) (combinations (n-1) xs)) ++ combinations n xs
+
+-- Problem 27
+
+
+-- Problem 28
+lsort :: [[a]] -> [[a]]
+lsort [] = []
+lsort [x] = [x]
+lsort (x:xs) = (lsort (filter (\l -> length l < lex) xs)) ++
+               [x] ++
+               (lsort (filter (\l -> length l >= lex) xs))
+    where lex = length x

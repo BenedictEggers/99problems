@@ -3,6 +3,7 @@
 
 module EvenMoreLists where
 
+import System.Random
 
 -- Problem 21
 insertAt y [] 1 = [y]
@@ -19,7 +20,8 @@ range' bot top
     | bot < top  = bot:range' (bot + 1) top
 
 -- Problem 23
-
+rndSelect [] = []
+rndSelect xs = xs !! first (randomR (0, (length xs) - 1) getStdGen)
 
 -- Problem 24
 

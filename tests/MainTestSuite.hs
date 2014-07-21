@@ -63,8 +63,6 @@ prop_lsort_sorted xs = sorted $ lsort xs
     sorted [x] = True
     sorted (x:xs) = (length x) <= (length $ head xs) && sorted xs
 
-prop_rndSelect :: [Int] -> Property
-prop_rndSelect xs = not (null xs) ==> rndSelect xs `elem` xs
 
 -- The tests themselves
 tests :: [TF.Test]
@@ -295,10 +293,6 @@ tests =
       testCase "range -2 2 should be [-2..2]"
           ([-2..2] @=? range' (-2) 2),
       testProperty "range should have the right lengths" prop_rangeLength
-    ],
-
-    testGroup "rndSelect (problem 23)" [
-      testProperty "rndSelected elements should be in the list" prop_rndSelect
     ],
 
     testGroup "combinations (problem 26)" [

@@ -20,8 +20,10 @@ range' bot top
     | bot < top  = bot:range' (bot + 1) top
 
 -- Problem 23
-rndSelect [] = []
-rndSelect xs = xs !! first (randomR (0, (length xs) - 1) getStdGen)
+rndSelect :: [a] -> Int -> IO [a]
+rndSelect xs n = do
+    g <- getStdGen
+    return $ take n [xs !! i | i <- randomRs (0, (length xs) - 1) g]
 
 -- Problem 24
 

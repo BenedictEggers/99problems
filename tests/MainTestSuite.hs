@@ -68,6 +68,9 @@ prop_gcd n m = n > 0 && m > 0 ==> gcd n m == gcd' n m
 
 prop_coprime n m = coprime n m == (gcd n m == 1)
 
+prop_primeFactors n = n > 0 && n < 100000 ==>
+    foldl (\acc x -> acc*x) 1 (primeFactors n) == n
+
 
 -- The tests themselves
 tests :: [TF.Test]
@@ -352,5 +355,15 @@ tests =
           (2 @=? totient 4),
       testCase "totient 10 = 4"
           (4 @=? totient 10)
+    ],
+
+    testGroup "primeFactors (problem 35)" [
+      testCase "primeFactors 4 should give [2,2]"
+          ([2,2] @=? primeFactors 4),
+      testCase "primeFactors 23 should give [23]"
+          ([23] @=? primeFactors 23),
+      testCase "primeFactors 315 should give [3,3,5,7]"
+          ([3,3,5,7] @=? primeFactors 315),
+      testProperty "prime factors should multiply to the original number" prop_primeFactors
     ]
   ]

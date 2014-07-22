@@ -18,3 +18,10 @@ coprime n m = gcd n m == 1
 -- Problem 34
 totient :: Int -> Int
 totient n = length [x | x <- [1..n], coprime x n]
+
+-- Problem 35
+primeFactors :: Int -> [Int]
+primeFactors n = helper n []
+    where helper 1 acc = reverse acc
+          helper n acc = let x = head [q | q <- [2..n], isPrime q && n `mod` q == 0]
+                         in helper (quot n x) (x : acc)

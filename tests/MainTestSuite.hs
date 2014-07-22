@@ -71,6 +71,8 @@ prop_coprime n m = coprime n m == (gcd n m == 1)
 prop_primeFactors n = n > 0 && n < 100000 ==>
     foldl (\acc x -> acc*x) 1 (primeFactors n) == n
 
+prop_primeFactorsMult n = n > 0 && n < 100000 ==>
+    foldl (\x (f, m) -> x * (f ^ m)) 1 (primeFactorsMult n) == n
 
 -- The tests themselves
 tests :: [TF.Test]
@@ -365,5 +367,15 @@ tests =
       testCase "primeFactors 315 should give [3,3,5,7]"
           ([3,3,5,7] @=? primeFactors 315),
       testProperty "prime factors should multiply to the original number" prop_primeFactors
+    ],
+
+    testGroup "primeFactorsMult (problem 36)" [
+      testCase "primeFactorsMult 4 should give [(2,2)]"
+          ([(2,2)] @=? primeFactorsMult 4),
+      testCase "primeFactorsMult 23 should give [(23, 1)]"
+          ([(23, 1)] @=? primeFactorsMult 23),
+      testCase "primeFactorsMult 315 should give [(3,2), (5,1), (7,1)]"
+          ([(3,2), (5,1), (7,1)] @=? primeFactorsMult 315),
+      testProperty "prime factors should multiply to the number" prop_primeFactorsMult
     ]
   ]

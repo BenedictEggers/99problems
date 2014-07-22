@@ -25,3 +25,11 @@ primeFactors n = helper n []
     where helper 1 acc = reverse acc
           helper n acc = let x = head [q | q <- [2..n], isPrime q && n `mod` q == 0]
                          in helper (quot n x) (x : acc)
+
+-- Problem 36
+primeFactorsMult :: Int -> [(Int, Int)]
+primeFactorsMult n = helper (primeFactors n) []
+    where helper [] acc = reverse acc
+          helper (x:xs) acc = helper
+                            (dropWhile (==x) xs)
+                            ((x, (length (takeWhile (==x) xs) + 1)):acc)

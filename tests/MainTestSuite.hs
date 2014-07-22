@@ -74,6 +74,8 @@ prop_primeFactors n = n > 0 && n < 100000 ==>
 prop_primeFactorsMult n = n > 0 && n < 100000 ==>
     foldl (\x (f, m) -> x * (f ^ m)) 1 (primeFactorsMult n) == n
 
+prop_totientImproved n = n > 0 && n < 10000 ==> totient n == totientImproved n
+
 -- The tests themselves
 tests :: [TF.Test]
 tests = 
@@ -377,5 +379,9 @@ tests =
       testCase "primeFactorsMult 315 should give [(3,2), (5,1), (7,1)]"
           ([(3,2), (5,1), (7,1)] @=? primeFactorsMult 315),
       testProperty "prime factors should multiply to the number" prop_primeFactorsMult
+    ],
+
+    testGroup "totientImproved (problem 37)" [
+      testProperty "totient == totientImproved" prop_totientImproved
     ]
   ]

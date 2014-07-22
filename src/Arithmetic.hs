@@ -33,3 +33,9 @@ primeFactorsMult n = helper (primeFactors n) []
           helper (x:xs) acc = helper
                             (dropWhile (==x) xs)
                             ((x, (length (takeWhile (==x) xs) + 1)):acc)
+
+-- Problem 37
+totientImproved :: Int -> Int
+totientImproved n  = helper (primeFactorsMult n) 1
+    where helper [] acc = acc
+          helper ((f, m):facs) acc = helper facs (acc * (f - 1) * f ^ (m - 1))

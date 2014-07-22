@@ -26,7 +26,10 @@ rndSelect xs n = do
     return $ take n [xs !! i | i <- randomRs (0, (length xs) - 1) g]
 
 -- Problem 24
-
+diffSelect :: Int -> Int -> IO [Int]
+diffSelect n m = do
+    g <- getStdGen
+    return $ take n $ randomRs (0, m) g
 
 -- Problem 25
 

@@ -14,6 +14,7 @@ import Test.QuickCheck
 import MyLists
 import MoreLists
 import EvenMoreLists
+import Arithmetic
 
 main = defaultMain tests
 
@@ -62,6 +63,8 @@ prop_lsort_sorted xs = sorted $ lsort xs
     sorted [] = True
     sorted [x] = True
     sorted (x:xs) = (length x) <= (length $ head xs) && sorted xs
+
+prop_gcd n m = n > 0 && m > 0 ==> gcd n m == gcd' n m
 
 
 -- The tests themselves
@@ -319,5 +322,20 @@ tests =
                 \ should give [\"o\",\"ijkl\",\"abc\",\"fgh\",\"de\",\"de\",\"mn\"]"
           (["o","ijkl","abc","fgh","de","de","mn"] @=?
             lfsort ["abc","de","fgh","de","ijkl","mn","o"])
+    ],
+
+    testGroup "isPrime (problem 31)" [
+      testCase "2 is prime"
+          (True @=? isPrime 2),
+      testCase "4 is not prime"
+          (False @=? isPrime 4),
+      testCase "51 is not prime"
+          (False @=? isPrime 51),
+      testCase "97 is prime"
+          (True @=? isPrime 97)
+    ],
+
+    testGroup "gcd (problem 32)" [
+      testProperty "our gcd should be the same as Prelude's" prop_gcd
     ]
   ]

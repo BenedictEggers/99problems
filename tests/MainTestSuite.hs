@@ -66,6 +66,8 @@ prop_lsort_sorted xs = sorted $ lsort xs
 
 prop_gcd n m = n > 0 && m > 0 ==> gcd n m == gcd' n m
 
+prop_coprime n m = coprime n m == (gcd n m == 1)
+
 
 -- The tests themselves
 tests :: [TF.Test]
@@ -337,5 +339,9 @@ tests =
 
     testGroup "gcd (problem 32)" [
       testProperty "our gcd should be the same as Prelude's" prop_gcd
+    ],
+
+    testGroup "coprime (problem 33)" [
+      testProperty "coprime if their gcd == 1" prop_coprime
     ]
   ]

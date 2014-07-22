@@ -10,3 +10,7 @@ isPrime n = null [x | x <- [2..floor $ sqrt $ fromIntegral n], n `mod` x == 0]
 -- Problem 32
 gcd' :: Int -> Int -> Int
 gcd' n m = if n == m then n else gcd (max n m `mod` min n m) (min n m)
+
+-- Problem 33
+coprime :: Int -> Int -> Bool
+coprime n m = gcd n m == 1

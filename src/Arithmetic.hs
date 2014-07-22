@@ -14,3 +14,7 @@ gcd' n m = if n == m then n else gcd (max n m `mod` min n m) (min n m)
 -- Problem 33
 coprime :: Int -> Int -> Bool
 coprime n m = gcd n m == 1
+
+-- Problem 34
+totient :: Int -> Int
+totient n = length [x | x <- [1..n], coprime x n]

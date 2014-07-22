@@ -343,5 +343,14 @@ tests =
 
     testGroup "coprime (problem 33)" [
       testProperty "coprime if their gcd == 1" prop_coprime
+    ],
+
+    testGroup "totient (problem 34)" [
+      testCase "totient 1 = 1"
+          (1 @=? totient 1),
+      testCase "totient 4 = 2"
+          (2 @=? totient 4),
+      testCase "totient 10 = 4"
+          (4 @=? totient 10)
     ]
   ]

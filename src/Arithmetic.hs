@@ -3,6 +3,8 @@
 
 module Arithmetic where
 
+import Data.Numbers.Primes (primes)
+
 -- Problem 31
 isPrime :: Int -> Bool
 isPrime n = null [x | x <- [2..floor $ sqrt $ fromIntegral n], n `mod` x == 0]
@@ -39,3 +41,7 @@ totientImproved :: Int -> Int
 totientImproved n  = helper (primeFactorsMult n) 1
     where helper [] acc = acc
           helper ((f, m):facs) acc = helper facs (acc * (f - 1) * f ^ (m - 1))
+
+-- Problem 39
+primesR :: Int -> Int -> [Int]
+primesR b t = takeWhile (<=t) . dropWhile (<b) $ primes

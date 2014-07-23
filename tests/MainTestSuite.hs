@@ -76,6 +76,9 @@ prop_primeFactorsMult n = n > 0 && n < 100000 ==>
 
 prop_totientImproved n = n > 0 && n < 10000 ==> totient n == totientImproved n
 
+prop_primesR n m = n > 0 && m > 0 && n < 10000 && m < 10000 ==>
+    foldl (\acc x -> acc && (x >= n && x <= m)) True (primesR n m)
+
 -- The tests themselves
 tests :: [TF.Test]
 tests = 
@@ -383,5 +386,13 @@ tests =
 
     testGroup "totientImproved (problem 37)" [
       testProperty "totient == totientImproved" prop_totientImproved
+    ],
+
+    testGroup "primesR (problem 39)" [
+      testCase "primesR 10 20 should give [11, 13, 17, 19]"
+          ([11, 13, 17, 19] @=? primesR 10 20),
+      testCase "primesR 1 10 should give [2, 3, 5, 7]"
+          ([2,3,5,7] @=? primesR 1 10),
+      testProperty "primes should be within range" prop_primesR
     ]
   ]

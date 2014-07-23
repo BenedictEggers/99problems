@@ -17,7 +17,7 @@ cabal-version:       >=1.8
 executable 99problems
   main-is:             Main.hs
   -- other-modules:       
-  build-depends:       base ==4.6.*, HUnit ==1.2.*, random
+  build-depends:       base ==4.6.*, HUnit ==1.2.*, random, primes
 
 test-suite 99-tests
   type:               exitcode-stdio-1.0
@@ -29,4 +29,5 @@ test-suite 99-tests
                       test-framework,
                       test-framework-hunit,
                       test-framework-quickcheck2,
-                      random
+                      random,
+                      primes

@@ -79,6 +79,12 @@ prop_totientImproved n = n > 0 && n < 10000 ==> totient n == totientImproved n
 prop_primesR n m = n > 0 && m > 0 && n < 10000 && m < 10000 ==>
     foldl (\acc x -> acc && (x >= n && x <= m)) True (primesR n m)
 
+prop_goldbach_prime n = n `mod` 2 == 0 && n > 0 && n < 10000 ==>
+    let (p, q) = goldbach n in isPrime p && isPrime q
+
+prop_goldbach_adding n = n `mod` 2 == 0 && n > 0 && n < 10000 ==>
+    let (p, q) = goldbach n in p + q == n
+
 -- The tests themselves
 tests :: [TF.Test]
 tests = 
@@ -394,5 +400,10 @@ tests =
       testCase "primesR 1 10 should give [2, 3, 5, 7]"
           ([2,3,5,7] @=? primesR 1 10),
       testProperty "primes should be within range" prop_primesR
+    ],
+
+    testGroup "goldbach (problem 40)" [
+      testProperty "goldbachs should both be prime" prop_goldbach_prime,
+      testProperty "goldbachs should add to the original" prop_goldbach_adding
     ]
   ]

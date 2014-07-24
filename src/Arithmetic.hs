@@ -45,3 +45,12 @@ totientImproved n  = helper (primeFactorsMult n) 1
 -- Problem 39
 primesR :: Int -> Int -> [Int]
 primesR b t = takeWhile (<=t) . dropWhile (<b) $ primes
+
+-- Problem 40
+goldbach :: Int -> (Int, Int)
+goldbach n
+    | n `mod` 2 == 1 = error "What the hell man, give me an even integer."
+    | otherwise = helper n primes
+    where helper n (p:ps) = if isPrime $ n - p
+                        then (p, n - p)
+                        else helper n ps

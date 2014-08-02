@@ -74,16 +74,31 @@ prop_primeFactors n = n > 0 && n < 100000 ==>
 prop_primeFactorsMult n = n > 0 && n < 100000 ==>
     foldl (\x (f, m) -> x * (f ^ m)) 1 (primeFactorsMult n) == n
 
-prop_totientImproved n = n > 0 && n < 10000 ==> totient n == totientImproved n
+prop_totientImproved n = n > 0 && n < 100000 ==> totient n == totientImproved n
 
-prop_primesR n m = n > 0 && m > 0 && n < 10000 && m < 10000 ==>
+prop_primesR n m = n > 0 && m > 0 && n < 100000 && m < 100000 ==>
     foldl (\acc x -> acc && (x >= n && x <= m)) True (primesR n m)
 
-prop_goldbach_prime n = n `mod` 2 == 0 && n > 0 && n < 10000 ==>
+prop_goldbach_prime n = n `mod` 2 == 0 && n > 2 && n < 100000 ==>
     let (p, q) = goldbach n in isPrime p && isPrime q
 
-prop_goldbach_adding n = n `mod` 2 == 0 && n > 0 && n < 10000 ==>
+prop_goldbach_adding n = n `mod` 2 == 0 && n > 2 && n < 100000 ==>
     let (p, q) = goldbach n in p + q == n
+
+prop_goldbachList n m = n > 2 && m > n && m - n < 10000 ==>
+    allPairsEven n $ goldbachList n m
+    where allPairsEven _ [] = True
+          allPairsEven n ((p,q):xs) = isPrime p && isPrime q &&
+                                      (p + q == n || p + q == n + 1) && 
+                                      allPairsEven (n+2) xs
+
+prop_goldbachList' n m q = n > 2 && m > n && m - n < 10000 && q < n==>
+    let gs = goldbachList' n m q in allPrimes gs
+                                 && allAboveQ gs q
+    where allPrimes [] = True
+          allPrimes ((n,m):gs) = isPrime n && isPrime m && allPrimes gs
+          allAboveQ [] _ = True
+          allAboveQ ((n,m):gs) q = n > q && m > q && allAboveQ gs q
 
 -- The tests themselves
 tests :: [TF.Test]
@@ -405,5 +420,12 @@ tests =
     testGroup "goldbach (problem 40)" [
       testProperty "goldbachs should both be prime" prop_goldbach_prime,
       testProperty "goldbachs should add to the original" prop_goldbach_adding
+    ],
+
+    testGroup "goldbachList (problem 41)" [
+      testProperty "should have the required properties" prop_goldbachList
+    ],
+    testGroup "goldbachList' (problem 41b)" [
+      testProperty "should have required properties" prop_goldbachList'
     ]
   ]
